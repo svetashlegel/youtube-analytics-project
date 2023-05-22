@@ -16,9 +16,33 @@ class Channel:
         self.title = self.channel["items"][0]["snippet"]["title"]
         self.description = self.channel["items"][0]["snippet"]["description"]
         self.url = self.channel["items"][0]["snippet"]["thumbnails"]["high"]["url"]
-        self.subscriber_count = self.channel["items"][0]["statistics"]["subscriberCount"]
+        self.subscriber_count = int(self.channel["items"][0]["statistics"]["subscriberCount"])
         self.video_count = self.channel["items"][0]["statistics"]["videoCount"]
         self.view_count = self.channel["items"][0]["statistics"]["viewCount"]
+
+    def __str__(self):
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        return self.subscriber_count - other.subscriber_count
+
+    def __lt__(self, other):
+        return self.subscriber_count < other.subscriber_count
+
+    def __le__(self, other):
+        return self.subscriber_count <= other.subscriber_count
+
+    def __gt__(self, other):
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other):
+        return self.subscriber_count >= other.subscriber_count
+
+    def __eq__(self, other):
+        return self.subscriber_count == other.subscriber_count
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -49,9 +73,3 @@ class Channel:
         }
         with open(file_name, 'wt') as file:
             json.dump(data, file)
-
-
-#moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
-#print(moscowpython.channel_id)
-#print(Channel.get_service())
-#moscowpython.to_json('example.json')
