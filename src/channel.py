@@ -21,27 +21,35 @@ class Channel:
         self.view_count = self.channel["items"][0]["statistics"]["viewCount"]
 
     def __str__(self):
+        """Возвращает название и ссылку на канал по шаблону <название_канала> (<ссылка_на_канал>)"""
         return f'{self.title} ({self.url})'
 
     def __add__(self, other):
+        """Складывает кол-во подписчиков каналов"""
         return self.subscriber_count + other.subscriber_count
 
     def __sub__(self, other):
+        """Возвращает разницу кол-ва подписчиков каналов"""
         return self.subscriber_count - other.subscriber_count
 
     def __lt__(self, other):
+        """Определяет, что кол-во подписчиков первого канала меньше, чем второго"""
         return self.subscriber_count < other.subscriber_count
 
     def __le__(self, other):
+        """Определяет, что кол-во подписчиков первого канала не больше, чем второго"""
         return self.subscriber_count <= other.subscriber_count
 
     def __gt__(self, other):
+        """Определяет, что кол-во подписчиков первого канала больше, чем второго"""
         return self.subscriber_count > other.subscriber_count
 
     def __ge__(self, other):
+        """Определяет, что кол-во подписчиков первого канала не меньше, чем второго"""
         return self.subscriber_count >= other.subscriber_count
 
     def __eq__(self, other):
+        """Определяет, что кол-во подписчиков первого канала равно кол-ву второго"""
         return self.subscriber_count == other.subscriber_count
 
     def print_info(self) -> None:
